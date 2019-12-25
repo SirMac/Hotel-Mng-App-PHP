@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Staff Log-In</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!--script src="js/ie-emulation-modes-warning.js"></script-->
+    
+  </head>
+
+  <body class="loginpage">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 logo-title">
+                <img src="./images/logo.png">
+            </div>
+
+            <div class="col-md-4 col-md-offset-4" style="box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7); padding-top: 20px">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="background-color: black;">
+                        <h3 class="panel-title text-center">Staff Log-In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="#" method="post" id="loginid">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Username" autocomplete="off" name="username" type="username" autofocus id="fname">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" autocomplete="off" name="password" type="password" id="fpass">
+                                </div>
+                                <div class="form-group">
+                                    <select name="utype" class="form-control" id="ftype" >
+                                        <option value="0">Front Desk</option>
+                                        <option value="1">Administrator</option>
+                                    </select>
+                                </div>
+                                <button type="submit" name="submit" class="btn btn-lg btn-success" style="float: right;" id="fsubmit">Login</button>
+                                <!--Change this to a button or input when using this as a form 
+                                <input type="submit" value="Login" class="btn btn-lg btn-success btn-block">-->
+                                <!-- <a href="adminpanel.php" class="btn btn-lg btn-success btn-block">Login</a> -->
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4 col-md-offset-4 text-center">
+                <h4 id="msg" class="text-white" style="background: rgba(0, 0, 0, 0.7);"></h4>
+            </div></div>
+       
+    </div>
+
+<script src="js/jquery-2.2.4.min.js"></script>
+<script>
+    /*
+    var form = document.getElementById("loginid-"); //get form by its ID
+    form.onsubmit = function(e){
+    e.preventDefault();
+   // var utype = $("#ftype").val();
+    var username = $("#fname").val();
+    var password = $("#fpass").val();
+    $.post("loginauth.php", { 
+    //  utype: utype, 
+      username: username, 
+      password: password },
+      function(data) {
+       // console.log(data);
+         $('#msg').html(data);
+      //   $('#loginid')[0].reset();
+      });
+    }
+   */ 
+$(function(){
+   //$("#loginid").submit(function(e){
+    $('form').on('submit', function(e){
+    e.preventDefault();
+     //   var username = $("#fname").val();
+     //   var password = $("#fpass").val();
+     //   var formdata = 'username'+ username + '&password'+ password;
+
+        jQuery.ajax({
+            type: "POST",
+            url: "loginauth.php",
+            data: jQuery('form').serialize(),
+            success: function(data){
+               // if(data['error']){
+                    jQuery('#msg').html(data);
+              //  }
+                
+             //   if(data['redirect']){
+             //       location.href = data['redirect'];
+             //   }
+            }
+        });
+   });
+});
+    </script>     
+
+<!--
+    <div class="container">
+      <form class="form-signin" role="form" action="loginauth.php" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="name" class="sr-only">Username</label>
+        <input type="text" id="username" name="username"class="form-control" placeholder="Username" required autofocus>
+        <label for="Password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div>  /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug >
+    <script src="js/ie10-viewport-bug-workaround.js"></script-->
+    
+  </body>
+</html>
